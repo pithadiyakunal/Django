@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">{{ employee.id|default:"Add" }} Employee</h1>
+        <form method="POST" action="{% if pk %}/api/employees/{{ pk }}/edit/{% else %}/api/employees/new/{% endif %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="first_name" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="first_name" name="first_name" value="{{ employee.first_name|default:'' }}">
+            </div>
+            <div class="mb-3">
+                <label for="last_name" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="last_name" name="last_name" value="{{ employee.last_name|default:'' }}">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" value="{{ employee.email|default:'' }}">
+            </div>
+            <div class="mb-3">
+                <label for="department" class="form-label">Department</label>
+                <input type="text" class="form-control" id="department" name="department" value="{{ employee.department|default:'' }}">
+            </div>
+            <div class="mb-3">
+                <label for="hire_date" class="form-label">Hire Date</label>
+                <input type="date" class="form-control" id="hire_date" name="hire_date" value="{{ employee.hire_date|default:'' }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="/api/employees/" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>
